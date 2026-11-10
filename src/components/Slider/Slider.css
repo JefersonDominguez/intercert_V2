@@ -1,0 +1,425 @@
+/* ============================================
+   RESPONSIVE SLIDER STYLES
+   ============================================
+   Handles images with different aspect ratios:
+   - slide1.jpeg: 825x510 (ratio: 1.62)
+   - slide2.jpeg: 2076x1557 (ratio: 1.33) - TALLER
+   - slide3.jpeg: 1620x1080 (ratio: 1.50)
+   
+   Solution: Use consistent container height with proper
+   image containment to prevent overflow
+   ============================================ */
+
+/* ============================================
+   BACKGROUND IMAGE CONTAINMENT
+   ============================================ */
+.tv-slider-bg {
+  position: absolute !important;
+  top: 0 !important;
+  left: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  z-index: -1 !important;
+  background-size: cover !important;
+  background-position: center center !important;
+  background-repeat: no-repeat !important;
+  /* Override main.css transform scale */
+  transform: none !important;
+  -webkit-transform: none !important;
+}
+
+/* ============================================
+   PAGINATION BULLETS (Desktop)
+   ============================================ */
+.tv-slider-area .tv-slider-arrow-box {
+  position: absolute;
+  top: 50%;
+  right: clamp(24px, 4vw, 80px);
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+}
+
+.tv-slider-area .tv-slider-arrow-box .swiper-pagination {
+  display: flex !important;
+  flex-direction: column !important;
+  align-items: center !important;
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  margin: 0 !important;
+  transform: none !important;
+  gap: 35px !important;
+}
+
+.tv-slider-area .tv-slider-arrow-box .swiper-pagination.swiper-pagination-horizontal {
+  bottom: auto !important;
+  left: auto !important;
+  width: auto !important;
+}
+
+.tv-slider-area .tv-slider-arrow-box span.swiper-pagination-bullet {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  width: 38px !important;
+  height: 38px !important;
+  line-height: 1 !important;
+  border-radius: 50% !important;
+  border: 1px solid rgba(255, 255, 255, 0.45) !important;
+  background: rgba(10, 22, 94, 0.35) !important;
+  color: #fff !important;
+  font-weight: 600 !important;
+  font-size: 14px !important;
+  transition: all 0.3s ease !important;
+  opacity: 1 !important;
+  position: relative !important;
+  margin: 0 !important;
+}
+
+.tv-slider-area .tv-slider-arrow-box span.swiper-pagination-bullet.swiper-pagination-bullet-active {
+  background: linear-gradient(180deg, #159dbc 10%) !important;
+  border-color: transparent !important;
+  box-shadow: 0 10px 20px rgba(30, 64, 255, 0.35) !important;
+  transform: scale(1.1) !important;
+}
+
+/* Connector line between bullets */
+.tv-slider-area .tv-slider-arrow-box span.swiper-pagination-bullet:not(:last-child)::after {
+  content: "" !important;
+  position: absolute !important;
+  width: 1px !important;
+  height: 35px !important;
+  background: linear-gradient(180deg, #159dbc 0%, rgba(21, 157, 188, 0) 100%) !important;
+  left: 50% !important;
+  bottom: -35px !important;
+  transform: translateX(-50%) !important;
+  z-index: -1 !important;
+}
+
+.tv-slider-area .tv-slider-arrow-box::after {
+  content: "";
+  position: absolute;
+  width: 120px;
+  height: 100%;
+  right: -60px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: linear-gradient(90deg, rgba(10, 22, 94, 0.8) 0%, rgba(10, 22, 94, 0) 100%);
+  filter: blur(60px);
+  z-index: -1;
+}
+
+/* ============================================
+   SLIDER CONTAINER - DESKTOP (>1600px)
+   ============================================ */
+.tv-slider-overlay {
+  position: relative;
+  width: 100%;
+  min-height: 600px;
+  height: 600px;
+  max-height: 600px;
+  overflow: hidden;
+}
+
+.tv-slider-overlay .container {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Desktop text sizes - Base */
+.tv-slider-subtitle {
+  font-size: 18px !important;
+  padding-left: 57px;
+}
+
+.tv-slider-title {
+  font-size: 58px !important;
+  line-height: 1.2 !important;
+  margin-bottom: 18px !important;
+}
+
+.tv-slider-content p {
+  font-size: 17px !important;
+  font-weight: 600;
+  line-height: 1.6;
+  color: #fff;
+  margin-bottom: 0;
+}
+
+.tv-slider-text {
+  margin-bottom: 25px;
+}
+
+/* Button scaling */
+.tv-slider-btn .tv-btn-primary {
+  padding: 16px 32px;
+  font-size: 15px;
+}
+
+/* ============================================
+   LARGE DESKTOP (1400px - 1600px)
+   ============================================ */
+@media (min-width: 1400px) and (max-width: 1600px) {
+  .tv-slider-overlay {
+    min-height: 580px;
+    height: 580px;
+    max-height: 580px;
+  }
+
+  .tv-slider-subtitle {
+    font-size: 17px !important;
+  }
+
+  .tv-slider-title {
+    font-size: 55px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 16px !important;
+  }
+}
+
+/* ============================================
+   DESKTOP (1200px - 1399px)
+   ============================================ */
+@media (min-width: 1200px) and (max-width: 1399px) {
+  .tv-slider-overlay {
+    min-height: 520px;
+    height: 520px;
+    max-height: 520px;
+  }
+
+  .tv-slider-subtitle {
+    font-size: 16px !important;
+    padding-left: 50px;
+  }
+
+  .tv-slider-title {
+    font-size: 48px !important;
+    margin-bottom: 16px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 15px !important;
+    line-height: 1.5;
+  }
+
+  .tv-slider-text {
+    margin-bottom: 22px;
+  }
+
+  .tv-slider-btn .tv-btn-primary {
+    padding: 14px 28px;
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   TABLET LANDSCAPE (992px - 1199px)
+   ============================================ */
+@media (min-width: 992px) and (max-width: 1199px) {
+  .tv-slider-overlay {
+    min-height: 480px;
+    height: 480px;
+    max-height: 480px;
+  }
+
+  .tv-slider-content {
+    padding: 100px 0 !important;
+  }
+
+  .tv-slider-subtitle {
+    font-size: 15px !important;
+    padding-left: 45px;
+    margin-bottom: 18px;
+  }
+
+  .tv-slider-title {
+    font-size: 42px !important;
+    margin-bottom: 14px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 14px !important;
+    line-height: 1.5;
+  }
+
+  .tv-slider-text {
+    margin-bottom: 20px;
+  }
+
+  .tv-slider-btn .tv-btn-primary {
+    padding: 13px 26px;
+    font-size: 14px;
+  }
+}
+
+/* ============================================
+   TABLET PORTRAIT (768px - 991px)
+   ============================================ */
+@media (min-width: 768px) and (max-width: 991px) {
+  .tv-slider-overlay {
+    min-height: 450px;
+    height: 450px;
+    max-height: 450px;
+  }
+
+  .tv-slider-content {
+    padding: 80px 0 !important;
+  }
+
+  .tv-slider-subtitle {
+    font-size: 14px !important;
+    padding-left: 40px;
+    margin-bottom: 16px;
+  }
+
+  .tv-slider-title {
+    font-size: 38px !important;
+    line-height: 1.15 !important;
+    margin-bottom: 12px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 14px !important;
+    line-height: 1.5 !important;
+  }
+
+  .tv-slider-text {
+    margin-bottom: 18px;
+  }
+
+  .tv-slider-btn .tv-btn-primary {
+    padding: 12px 24px;
+    font-size: 13px;
+  }
+
+  /* Hide pagination bullets on tablet */
+  .tv-slider-area .tv-slider-arrow-box {
+    display: none;
+  }
+}
+
+/* ============================================
+   MOBILE LANDSCAPE (576px - 767px)
+   ============================================ */
+@media (min-width: 576px) and (max-width: 767px) {
+  .tv-slider-overlay {
+    min-height: 420px;
+    height: 420px;
+    max-height: 420px;
+  }
+
+  .tv-slider-content {
+    padding: 70px 0 !important;
+  }
+
+  .tv-slider-subtitle {
+    font-size: 13px !important;
+    padding-left: 35px;
+    margin-bottom: 14px;
+  }
+
+  .tv-slider-title {
+    font-size: 32px !important;
+    line-height: 1.15 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    max-width: 95%;
+  }
+
+  .tv-slider-text {
+    margin-bottom: 16px;
+  }
+
+  .tv-slider-btn .tv-btn-primary {
+    padding: 11px 22px;
+    font-size: 13px;
+  }
+
+  .tv-slider-area .tv-slider-arrow-box {
+    display: none;
+  }
+}
+
+/* ============================================
+   MOBILE PORTRAIT (<576px)
+   ============================================ */
+@media (max-width: 575px) {
+  .tv-slider-overlay {
+    min-height: 500px;
+    height: 500px;
+    max-height: 500px;
+  }
+
+  .tv-slider-content {
+    padding: 60px 0 !important;
+  }
+
+  .tv-slider-subtitle {
+    font-size: 12px !important;
+    padding-left: 30px;
+    margin-bottom: 12px;
+  }
+
+  .tv-slider-subtitle::before {
+    width: 22px !important;
+  }
+
+  .tv-slider-title {
+    font-size: 28px !important;
+    line-height: 1.2 !important;
+    margin-bottom: 10px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 13px !important;
+    line-height: 1.4 !important;
+    max-width: 100%;
+  }
+
+  .tv-slider-text {
+    margin-bottom: 16px;
+  }
+
+  .tv-slider-btn .tv-btn-primary {
+    padding: 10px 20px;
+    font-size: 12px;
+  }
+
+  .tv-slider-area .tv-slider-arrow-box {
+    display: none;
+  }
+}
+
+/* ============================================
+   VERY SMALL MOBILE (<400px)
+   ============================================ */
+@media (max-width: 399px) {
+  .tv-slider-overlay {
+    min-height: 480px;
+    height: 480px;
+    max-height: 480px;
+  }
+
+  .tv-slider-title {
+    font-size: 24px !important;
+  }
+
+  .tv-slider-content p {
+    font-size: 12px !important;
+  }
+
+  .tv-slider-btn .tv-btn-primary {
+    padding: 9px 18px;
+    font-size: 11px;
+  }
+}

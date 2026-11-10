@@ -1,0 +1,81 @@
+import { BlogPost } from '../types/blog';
+
+export const BLOG_POSTS: BlogPost[] = [
+    {
+        id: 1,
+        title: '¿Por qué certificar tu empresa en ISO hoy? Tendencias globales que afectan a Latinoamérica',
+        category: 'Tendencias',
+        date: '14 Nov, 2025',
+        readTime: '7 min',
+        comments: 18,
+        author: 'Equipo Editorial INTERCERT',
+        image: '/assets/images/blog/1/mage_ndvf00ndvf00ndvf.png',
+        hero: '/assets/images/blog/1/mage_ndvf00ndvf00ndvf.png',
+        gallery: [
+            '/assets/images/blog/1/_Image_3kadzo3kadzo3kad.png',
+            '/assets/images/blog/1/_Image_fu54vafu54vafu54.png',
+        ],
+        excerpt: 'Las cadenas de suministro, las licitaciones globales y los nuevos requisitos ESG han convertido a la certificación ISO en el pasaporte para competir y exportar desde Latinoamérica.',
+        tags: ['ISO', 'Tendencias', 'Latam', 'ESG'],
+        content: {
+            intro: 'En 2025, el 72% de las compañías que importan desde Latinoamérica exige que sus proveedores estén certificados en al menos una norma ISO. La razón es simple: las grandes marcas buscan socios confiables que demuestren control de procesos, trazabilidad y sostenibilidad.',
+            paragraph1: 'Los programas de nearshoring y la presión regulatoria en Estados Unidos y Europa están elevando el estándar. Las auditorías de clientes ahora incluyen preguntas sobre ISO 9001, ISO 14001 o ISO 45001 antes incluso de hablar de precio. Sin un sistema certificado, muchas empresas quedan fuera de la mesa.',
+            paragraph2: 'Además, los inversionistas incorporan criterios ESG para otorgar financiamiento y los gobiernos de la región suman puntos adicionales en licitaciones cuando se presentan certificados vigentes. Certificarse hoy es una decisión estratégica para sostener el crecimiento durante la próxima década.',
+            quote: 'La certificación ISO dejó de ser un “nice to have”. Es el idioma común de la confianza empresarial en todo el mundo.',
+            paragraph3: 'Implementar un sistema de gestión también ordena internamente a la organización: documenta procesos, asigna responsables, habilita indicadores y acelera la toma de decisiones basada en datos. El efecto directo es menor retrabajo, más productividad y un aumento real en la satisfacción del cliente.',
+            paragraph4: 'En INTERCERT acompañamos a empresas de todos los tamaños con diagnósticos rápidos, planes de implementación ágiles y ensayos previos a la auditoría. Así, puedes certificarte una sola vez, sin sorpresas y capitalizando inmediatamente los beneficios comerciales.',
+        },
+    },
+    {
+        id: 2,
+        title: 'Errores comunes en auditorías y cómo evitarlos: Guía práctica para PYMES y grandes empresas',
+        category: 'Auditoría',
+        date: '07 Nov, 2025',
+        readTime: '6 min',
+        comments: 24,
+        author: 'Auditores Líderes INTERCERT',
+        image: '/assets/images/blog/2/Image_d28txmd28txmd28t.png',
+        hero: '/assets/images/blog/2/Image_d28txmd28txmd28t.png',
+        gallery: [
+            '/assets/images/blog/2/_Image_xbt8gxbt8gxbt8gx.png',
+            '/assets/images/blog/2/_Image_f433nhf433nhf433.png',
+        ],
+        excerpt: 'Reunimos las fallas más frecuentes detectadas por nuestros auditores y te damos acciones concretas para superarlas antes de tu próxima auditoría.',
+        tags: ['Auditoría', 'ISO', 'Mejora Continua'],
+        content: {
+            intro: 'Más del 60% de los hallazgos mayores en auditorías ISO provienen de errores repetidos: registros incompletos, controles sin evidencia y cambios mal gestionados. La buena noticia es que todos pueden prevenirse con preparación.',
+            paragraph1: 'El primer error es creer que la auditoría evalúa personas; en realidad evalúa el sistema. Cuando los colaboradores entienden el alcance y tienen guías simples para mostrar la evidencia, la tensión desaparece. Checklists visuales y simulacros cortos son aliados clave.',
+            paragraph2: 'Otro fallo común es olvidar el cierre formal de acciones correctivas. Las organizaciones implementan mejoras pero no documentan la verificación de eficacia. Un simple registro con fecha, responsable y resultado evita no conformidades mayores.',
+            quote: 'Una auditoría exitosa no es un golpe de suerte. Es la suma de hábitos diarios bien documentados.',
+            paragraph3: 'También aconsejamos revisar los indicadores críticos de cada proceso el mes previo. Si alguno está por debajo de la meta, deja evidencia del análisis de causa y de los planes desplegados. Eso demuestra control y compromiso con la mejora continua.',
+            paragraph4: 'Finalmente, asegúrate de que la alta dirección participe en la reunión de apertura y cierre. Su presencia refuerza la cultura de calidad y permite tomar decisiones inmediatas frente a cualquier recomendación del auditor.',
+        },
+    },
+    {
+        id: 3,
+        title: '¿ISO 9001, ISO 37001, ISO 45001 o ISO 14001? La guía definitiva para elegir la norma adecuada para tu empresa',
+        category: 'Guía',
+        date: '01 Nov, 2025',
+        readTime: '8 min',
+        comments: 31,
+        author: 'Consultores INTERCERT',
+        image: '/assets/images/blog/3/Image_jcvo0tjcvo0tjcvo.png',
+        hero: '/assets/images/blog/3/Image_jcvo0tjcvo0tjcvo.png',
+        gallery: [
+            '/assets/images/blog/3/_Image_4vami64vami64vam.png',
+            '/assets/images/blog/3/nm0s9fnm0s9fnm0s.png',
+        ],
+        excerpt: 'Te ayudamos a entender qué norma ISO responde mejor a tu modelo de negocio, tus riesgos y tus planes de expansión.',
+        tags: ['ISO 9001', 'ISO 37001', 'ISO 45001', 'ISO 14001'],
+        content: {
+            intro: 'Elegir la norma ISO correcta depende de tus objetivos: ¿buscas credibilidad comercial, combatir el soborno, cuidar a tu equipo o demostrar sostenibilidad? Cada estándar resuelve un dolor específico y puede integrarse progresivamente.',
+            paragraph1: 'ISO 9001 es la base: ordena procesos, estandariza la operación y abre puertas en licitaciones. ISO 37001 se enfoca en la prevención del soborno y es ideal para empresas que tratan con sector público o cadenas globales sensibles al cumplimiento.',
+            paragraph2: 'ISO 45001 protege la salud y seguridad ocupacional; imprescindible para industrias con operaciones en campo. ISO 14001 responde a clientes que exigen evidencia ambiental y facilita reportes ESG. Todas comparten la estructura de alto nivel, lo que permite implementarlas de forma integrada.',
+            quote: 'No necesitas certificar todas las normas al mismo tiempo. Empieza con la que soluciona tu riesgo más crítico y agrega el resto cuando tu estrategia lo demande.',
+            paragraph3: 'Realiza un diagnóstico rápido: lista los requisitos regulatorios, los riesgos más costosos y las oportunidades comerciales que podrías habilitar con cada norma. Así priorizas la inversión y demuestras retorno en semanas.',
+            paragraph4: 'En INTERCERT diseñamos hojas de ruta por etapas, combinando consultoría, formación y auditorías internas para que puedas certificar una, dos o más normas sin duplicar esfuerzos ni documentación.',
+        },
+    },
+];
+
+export const getBlogPostById = (id: string | number): BlogPost | undefined => BLOG_POSTS.find((post) => String(post.id) === String(id));

@@ -1,0 +1,30 @@
+{
+  "name": "INTERCERT LATAM - Certificaciones ISO Acreditadas",
+  "short_name": "INTERCERT",
+  "description": "Certificaciones ISO acreditadas internacionalmente. ISO 9001, 14001, 45001, 27001 y más.",
+  "icons": [
+    {
+      "src": "/favicon-128x128.png",
+      "sizes": "128x128",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "theme_color": "#159dbc",
+  "background_color": "#ffffff",
+  "display": "standalone",
+  "start_url": "/",
+  "scope": "/",
+  "lang": "es",
+  "dir": "ltr",
+  "categories": ["business", "productivity"],
+  "screenshots": [
+    {
+      "src": "/assets/images/screenshot-desktop.png",
+      "sizes": "1280x720",
+      "type": "image/png",
+      "form_factor": "wide"
+    }
+  ]
+}
+

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" preserveAspectRatio="xMidYMid meet">
+  <defs>
+    <style>
+      .logo-text {
+        fill: #ffffff;
+        font-family: 'Arial Black', 'Arial', sans-serif;
+        font-weight: 900;
+        letter-spacing: 18px;
+      }
+      .intercert {
+        font-size: 85px;
+      }
+      .latam {
+        font-size: 85px;
+      }
+    </style>
+  </defs>
+  
+  <!-- INTERCERT en la parte superior -->
+  <text x="400" y="110" text-anchor="middle" class="logo-text intercert">INTERCERT</text>
+  
+  <!-- LATAM en la parte inferior -->
+  <text x="400" y="210" text-anchor="middle" class="logo-text latam">LATAM</text>
+</svg>
+

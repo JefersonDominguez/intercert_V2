@@ -1,0 +1,46 @@
+User-agent: *
+Allow: /
+Disallow: /panel
+Disallow: /dashboard
+Disallow: /api/
+Disallow: /admin/
+Disallow: /gateway/
+Disallow: /private/
+Disallow: /*.json$
+Disallow: /*?*
+Allow: /?country=*
+Allow: /sitemap*.xml
+
+# Específico para Googlebot
+User-agent: Googlebot
+Allow: /
+Disallow: /panel
+Disallow: /dashboard
+Crawl-delay: 1
+
+# Específico para Bingbot
+User-agent: bingbot
+Allow: /
+Crawl-delay: 2
+
+# Bloquear bots problemáticos
+User-agent: SemrushBot
+Disallow: /
+
+User-agent: AhrefsBot
+Disallow: /
+
+User-agent: MJ12bot
+Disallow: /
+
+# Sitemaps principales
+Sitemap: https://intercertlatam.com/sitemap.xml
+Sitemap: https://intercertlatam.com/sitemap-index.xml
+Sitemap: https://intercertlatam.com/sitemap-pe.xml
+Sitemap: https://intercertlatam.com/sitemap-co.xml
+Sitemap: https://intercertlatam.com/sitemap-mx.xml
+Sitemap: https://intercertlatam.com/sitemap-ec.xml
+Sitemap: https://intercertlatam.com/sitemap-es.xml
+Sitemap: https://intercertlatam.com/sitemap-pa.xml
+Sitemap: https://intercertlatam.com/sitemap-cr.xml
+

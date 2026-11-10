@@ -1,0 +1,192 @@
+/* Presentation Page Styles - GTA VI Style */
+
+/* Fuentes GTA VI Oficiales */
+@font-face {
+  font-family: 'GTA';
+  src: url('/fonts/gta-bold.woff') format('woff');
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GTA';
+  src: url('/fonts/gta-semibold.woff') format('woff');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'GTA';
+  src: url('/fonts/gta-regular.woff') format('woff');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* Ya no necesitamos .presentation-wrapper porque usamos .presentation-page */
+
+.presentation-page .hero-reveal-container {
+  position: relative;
+  width: 100vw;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  will-change: transform, opacity;
+}
+
+.presentation-page .hero-reveal-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  will-change: transform;
+  transform-origin: center center;
+  backface-visibility: hidden;
+}
+
+.presentation-page .hero-reveal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  pointer-events: none;
+  will-change: opacity;
+}
+
+.presentation-page .hero-reveal-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  text-align: center;
+  color: white;
+  width: 90%;
+  max-width: 1400px;
+  padding: 0 40px;
+}
+
+/* Tipografía estilo GTA VI - SOLO en presentation */
+.presentation-page .gta-font {
+  font-family: 'GTA', 'Arial Black', sans-serif;
+  font-weight: bold;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+/* Animación bounce - SOLO para presentation */
+@keyframes presentation-bounce {
+  0%, 100% {
+    transform: translateX(-50%) translateY(0);
+  }
+  50% {
+    transform: translateX(-50%) translateY(-15px);
+  }
+}
+
+/* Animación de la rueda del mouse */
+@keyframes mouse-wheel-scroll {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+}
+
+.presentation-page .scroll-hint {
+  animation: presentation-bounce 2s infinite !important;
+}
+
+.presentation-page .mouse-wheel {
+  animation: mouse-wheel-scroll 1.5s infinite;
+}
+
+/* ============================================
+   ESTILOS AISLADOS SOLO PARA PRESENTATION PAGE
+   ============================================ */
+
+/* Contenedor principal - SOLO afecta a esta página */
+.presentation-page {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #fefefe;
+  overflow: hidden;
+  z-index: 1;
+}
+
+/* Body cuando está en presentation - SIN scroll (animación automática) */
+body:has(.presentation-page) {
+  height: 100vh !important; /* Sin scroll extra */
+  background: #000 !important;
+  overflow: hidden !important; /* Sin scroll */
+  overscroll-behavior: none !important;
+}
+
+.presentation-page .hero-text-1,
+.presentation-page .hero-text-2,
+.presentation-page .hero-text-3 {
+  will-change: transform, opacity, background-clip, -webkit-text-fill-color;
+  backface-visibility: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Efecto de texto con imagen dentro */
+.presentation-page .hero-text-1 {
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke: 2px rgba(255,255,255,0.4);
+}
+
+/* Fondo azul que cubre toda la vista */
+.presentation-page .hero-blue-bg {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #159dbc;
+  opacity: 0;
+  z-index: 3;
+  transition: opacity 0.1s ease;
+}
+
+.presentation-page .hero-reveal-scroll-hint {
+  animation: bounce 2s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero-reveal-content {
+    padding: 0 20px;
+  }
+  
+  .hero-text-1 {
+    white-space: normal !important;
+    text-align: center;
+  }
+  
+  .hero-text-2,
+  .hero-text-3 {
+    white-space: normal !important;
+    text-align: center;
+  }
+}

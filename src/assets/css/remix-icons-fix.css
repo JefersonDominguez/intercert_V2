@@ -1,0 +1,66 @@
+/* Fix para Remix Icons - Asegurar que se muestren correctamente */
+
+/* Estilos específicos para iconos de Remix en team-social */
+.team-social a i[class*="ri-"] {
+  font-family: "remixicon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block !important;
+  font-size: 16px !important;
+  color: var(--tv-heading-primary) !important;
+  visibility: visible !important;
+  opacity: 1 !important;
+}
+
+/* Asegurar que todos los iconos de Remix se muestren correctamente */
+i[class*="ri-"] {
+  font-family: "remixicon" !important;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  display: inline-block;
+}
+
+/* Fix para Magnific Popup Modal */
+.mfp-wrap {
+  z-index: 9999 !important;
+}
+
+.mfp-bg {
+  z-index: 9998 !important;
+}
+
+.mfp-content {
+  z-index: 9999 !important;
+}
+
+.mfp-iframe-scaler {
+  z-index: 9999 !important;
+}
+
+/* Asegurar que el modal sea visible */
+.mfp-wrap.mfp-ready {
+  opacity: 1 !important;
+}
+
+.mfp-bg.mfp-ready {
+  opacity: 0.8 !important;
+}
+
+/* Fix para iconos de dropdown del menú - remover pseudo-elementos ::after */
+.tv-header-menu nav ul li.has-dropdown::after,
+.tv-header-transparent .tv-header-menu nav ul li.has-dropdown::after,
+.tv-menu-mobile ul li.has-dropdown:hover > a::after,
+.tv-category-mobile-menu ul li.has-dropdown:hover > a::after {
+  content: none !important;
+  display: none !important;
+}

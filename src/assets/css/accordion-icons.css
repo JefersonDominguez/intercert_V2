@@ -1,0 +1,48 @@
+/* Fix para iconos del accordion con Remix Icons */
+.tv-custom-accordion .accordion-buttons {
+  position: relative;
+}
+
+/* Ocultar el pseudo-elemento ::after que causa el cuadrito */
+.tv-custom-accordion .accordion-buttons::after {
+  display: none !important;
+  content: none !important;
+  visibility: hidden !important;
+  opacity: 0 !important;
+}
+
+/* También ocultar ::before por si acaso */
+.tv-custom-accordion .accordion-buttons::before {
+  display: none !important;
+  content: none !important;
+}
+
+.tv-custom-accordion .accordion-buttons i {
+  position: absolute;
+  top: 50%;
+  right: 30px;
+  font-size: 24px;
+  font-weight: 700;
+  transform: translateY(-50%);
+  color: var(--tv-heading-primary);
+}
+
+.tv-custom-accordion .accordion-buttons:not(.collapsed) i {
+  color: var(--tv-common-white);
+}
+
+/* Asegurar que el texto no se superponga con el icono */
+.tv-custom-accordion .accordion-buttons {
+  padding-right: 80px !important;
+}
+
+@media (max-width: 575px) {
+  .tv-custom-accordion .accordion-buttons {
+    padding-right: 60px !important;
+  }
+  
+  .tv-custom-accordion .accordion-buttons i {
+    right: 20px;
+    font-size: 20px;
+  }
+}

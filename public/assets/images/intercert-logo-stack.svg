@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250">
+  <defs>
+    <style>
+      .text-logo {
+        fill: #fff;
+        font-family: 'Arial Black', sans-serif;
+        font-weight: 900;
+        font-size: 70px;
+        letter-spacing: 15px;
+      }
+    </style>
+  </defs>
+  <text x="400" y="90" text-anchor="middle" class="text-logo">INTERCERT</text>
+  <text x="400" y="180" text-anchor="middle" class="text-logo">LATAM</text>
+</svg>
+

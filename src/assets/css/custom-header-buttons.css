@@ -1,0 +1,203 @@
+/* Estilos personalizados para botones del header */
+/* Margen izquierdo para el menú de navegación */
+.tv-menu-content {
+  margin-left: 51.8px !important;
+}
+
+/* Centrar texto de botones en el header */
+.tv-header-right-action .tv-btn-primary.d-none.d-md-block {
+  text-align: center !important;
+}
+
+.tv-header-right-action .tv-btn-primary.d-none.d-md-block .btn-wrap {
+  text-align: center !important;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.tv-header-right-action .tv-btn-primary.d-none.d-md-block .btn-text1,
+.tv-header-right-action .tv-btn-primary.d-none.d-md-block .btn-text2 {
+  text-align: center !important;
+}
+
+/* Header responsive - evitar que se distorsione en pantallas medianas */
+@media (max-width: 1599px) and (min-width: 1400px) {
+  .tv-header-menu nav>ul {
+    margin-left: 80px !important;
+  }
+
+  .tv-header-right-action {
+    flex-wrap: nowrap !important;
+    gap: 6px;
+  }
+
+  .tv-header-right-action .tv-btn-primary {
+    font-size: 0.85rem !important;
+    padding: 10px 14px !important;
+    white-space: nowrap;
+    min-width: auto;
+  }
+
+  .tv-header-right-action .tv-btn-primary .btn-text1,
+  .tv-header-right-action .tv-btn-primary .btn-text2 {
+    font-size: 0.85rem !important;
+  }
+}
+
+@media (max-width: 1399px) and (min-width: 1200px) {
+  .tv-header-menu nav>ul {
+    margin-left: 50px !important;
+  }
+
+  .tv-header-right-action {
+    flex-wrap: nowrap !important;
+    gap: 6px;
+  }
+
+  .tv-header-right-action .tv-btn-primary {
+    font-size: 0.8rem !important;
+    padding: 9px 12px !important;
+    white-space: nowrap;
+    min-width: auto;
+  }
+
+  .tv-header-right-action .tv-btn-primary .btn-text1,
+  .tv-header-right-action .tv-btn-primary .btn-text2 {
+    font-size: 0.8rem !important;
+  }
+
+  /* Hacer botones más compactos en pantallas medianas */
+  .tv-header-right-action .verify-cert-btn {
+    max-width: 140px;
+  }
+
+  .tv-header-right-action .verify-cert-btn .btn-text1,
+  .tv-header-right-action .verify-cert-btn .btn-text2 {
+    display: block;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+  }
+}
+
+@media (max-width: 1199px) and (min-width: 992px) {
+  .tv-header-menu nav>ul {
+    margin-left: 20px !important;
+  }
+
+  .tv-header-right-action {
+    flex-wrap: nowrap !important;
+    gap: 4px;
+  }
+
+  .tv-header-right-action .tv-header-search {
+    display: none !important;
+  }
+
+  .tv-header-right-action .tv-btn-primary {
+    font-size: 0.75rem !important;
+    padding: 8px 10px !important;
+    white-space: nowrap;
+    min-width: auto;
+  }
+
+  .tv-header-right-action .tv-btn-primary .btn-text1,
+  .tv-header-right-action .tv-btn-primary .btn-text2 {
+    font-size: 0.75rem !important;
+  }
+
+  /* Forzar dropdown del usuario por encima de otros elementos */
+  .tv-header-right-action {
+    position: relative;
+    z-index: 5;
+  }
+
+  .tv-user-menu {
+    position: relative;
+    z-index: 10;
+    overflow: visible;
+  }
+
+  .tv-user-menu .tv-user-dropdown {
+    z-index: 20;
+    max-width: 280px;
+    overflow: visible;
+  }
+
+  /* Asegurar que el contenedor derecho mantenga todo en línea y permita dropdown */
+  .tv-header-right-action {
+    flex-wrap: nowrap !important;
+    gap: 8px;
+    overflow: visible !important;
+  }
+
+  .tv-header-right-action>* {
+    flex-shrink: 0;
+  }
+}
+
+/* En pantallas muy pequeñas, ocultar algunos elementos antes de que se distorsione */
+@media (max-width: 991px) {
+  .tv-header-right-action .tv-header-search {
+    display: none !important;
+  }
+}
+
+/* Ajustes adicionales para evitar desbordamiento */
+.tv-header-right-action {
+  flex-shrink: 0;
+  min-width: 0;
+}
+
+.tv-header-right-action .tv-btn-primary {
+  flex-shrink: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Asegurar que el contenedor del header no se desborde pero permita dropdowns */
+.container-1750 .row {
+  flex-wrap: nowrap;
+  overflow: visible;
+}
+
+.col-xxl-5.col-xl-5 {
+  flex: 0 0 auto;
+  max-width: none;
+  min-width: 0;
+  overflow: visible;
+}
+
+/* Ajustes globales para pantallas de escritorio estándar (1920x1080 y similares) */
+@media (max-width: 1920px) and (min-width: 1400px) {
+  .tv-header-menu nav>ul {
+    margin-left: 100px !important;
+  }
+
+  .tv-header-right-action {
+    gap: 8px;
+  }
+
+  .tv-header-right-action .tv-btn-primary {
+    padding: 10px 16px !important;
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Ajustes para pantallas más pequeñas pero aún grandes */
+@media (max-width: 1600px) and (min-width: 1400px) {
+  .tv-header-menu nav>ul {
+    margin-left: 60px !important;
+  }
+
+  .tv-header-right-action {
+    gap: 6px;
+  }
+
+  .tv-header-right-action .tv-btn-primary {
+    padding: 9px 14px !important;
+    font-size: 0.85rem !important;
+  }
+}
