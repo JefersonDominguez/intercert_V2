@@ -1,4 +1,5 @@
-const PDF_URL = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-1.pdf';
+const PDF_URL = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-2.pdf';
+const QR_URL = '/certificates/qr-henrry.jpg';
 
 export const DEMO_CERTIFICATE = {
     id: 1,
@@ -21,6 +22,7 @@ export const DEMO_CERTIFICATE = {
     iso_standard_name: 'LEED GREEN ASSOCIATE',
     scope: 'Ha completado el curso LEED Green Associate (100 horas), demostrando conocimiento en prácticas de construcción sostenible y principios LEED. Certificado emitido por INTERCERT con aprobación de Exemplar Global. Referencia TP-06587.',
     file_url: PDF_URL,
+    qr_image_url: QR_URL,
 };
 
 const HAYSTACK = [

@@ -37,6 +37,7 @@ interface Certificate {
     accreditation_body_logo?: string;
     certification_body_logo?: string;
     file_url?: string;
+    qr_image_url?: string;
 }
 
 const COUNTRY_LABELS: { [key: string]: string } = {
@@ -201,6 +202,10 @@ const CertificateDetail = () => {
 
     const generateQRCode = async () => {
         try {
+            if (certificate?.qr_image_url) {
+                setQrCodeDataUrl(certificate.qr_image_url);
+                return;
+            }
             const certToken = certificate?.public_token;
             const qrUrl = certToken
                 ? `${window.location.origin}/certificate?token=${certToken}`

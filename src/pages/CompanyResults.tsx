@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import VerificationForm from '../components/CertificateVerification/VerificationForm';
 import QRCode from 'qrcode';
 import { certificacionesCleanApi } from '../services/certificacionesCleanApi';
+import { DEMO_CERTIFICATE } from '../data/demoCertificate';
 import '../assets/css/iaf-certsearch-exact.css';
 
 interface CompanyData {
@@ -124,10 +125,19 @@ const CompanyResults = () => {
 
     const generateQRCode = async () => {
         try {
+            const companyToken = searchParams.get('token');
+            const rawName = searchParams.get('name') || '';
+            const companyName = rawName.toUpperCase();
+            if (
+                companyToken === DEMO_CERTIFICATE.company_token ||
+                companyName.includes('HENRRY WILLIAM RAMOS ALTAMIRANO')
+            ) {
+                setQrCodeDataUrl(DEMO_CERTIFICATE.qr_image_url);
+                return;
+            }
             // URL que redirigirá a la misma vista de resultados de empresa
             const companyId = searchParams.get('id');
-            const companyName = searchParams.get('name');
-            const qrUrl = `${window.location.origin}/company-results?id=${companyId}&name=${encodeURIComponent(companyName || '')}`;
+            const qrUrl = `${window.location.origin}/company-results?id=${companyId}&name=${encodeURIComponent(rawName)}`;
             const qrDataUrl = await QRCode.toDataURL(qrUrl, {
                 width: 100,
                 margin: 2,
