@@ -1,11 +1,9 @@
 const PDF_URL = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-2.pdf';
+const PDF_URL_ES = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-es.pdf';
 const QR_URL = '/certificates/qr-henrry.jpg';
+const QR_URL_ES = '/certificates/qr-henrry-es.png';
 
-export const DEMO_CERTIFICATE = {
-    id: 1,
-    number: 'ICA-LGA-2512104',
-    registration_number: 'ICA-LGA-2512104',
-    public_token: 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d',
+const COMPANY = {
     company_id: 1,
     company: 'HENRRY WILLIAM RAMOS ALTAMIRANO',
     company_name: 'HENRRY WILLIAM RAMOS ALTAMIRANO',
@@ -13,6 +11,14 @@ export const DEMO_CERTIFICATE = {
     company_address: 'Perú',
     company_addresses: [] as string[],
     company_token: '4f3c2a10-8b21-4d5e-9a77-1c0e6b8a2512',
+};
+
+export const DEMO_CERTIFICATE = {
+    id: 1,
+    number: 'ICA-LGA-2512104',
+    registration_number: 'ICA-LGA-2512104',
+    public_token: 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d',
+    ...COMPANY,
     status: 'Activo',
     issue_date: '2025-12-04',
     initial_certification_date: '2025-12-04',
@@ -25,19 +31,39 @@ export const DEMO_CERTIFICATE = {
     qr_image_url: QR_URL,
 };
 
-const HAYSTACK = [
-    DEMO_CERTIFICATE.company_name,
-    DEMO_CERTIFICATE.number,
-    'LEED',
-    'GREEN ASSOCIATE',
-    'LEED GREEN ASSOCIATE',
-    'TP-06587',
-    'Exemplar Global',
-    'HENRRY',
-    'WILLIAM',
-    'RAMOS',
-    'ALTAMIRANO',
-].join(' ').toLowerCase();
+export const DEMO_CERTIFICATE_ES = {
+    id: 2,
+    number: 'ICA-LGA-2512104',
+    registration_number: 'ICA-LGA-2512104',
+    public_token: 'c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f',
+    ...COMPANY,
+    status: 'Activo',
+    issue_date: '2025-12-04',
+    initial_certification_date: '2025-12-04',
+    standard_code: 'LEED Green Associate',
+    iso_standard_code: 'LEED Green Associate',
+    standard_name: 'LEED GREEN ASSOCIATE (ESPAÑOL)',
+    iso_standard_name: 'LEED GREEN ASSOCIATE (ESPAÑOL)',
+    scope: 'Ha completado satisfactoriamente el curso LEED Green Associate (100 horas), demostrando experiencia en prácticas de construcción sostenible y en los principios LEED (Liderazgo en Energía y Diseño Ambiental). Certificado emitido por INTERCERT y aprobado por Exemplar Global.',
+    file_url: PDF_URL_ES,
+    qr_image_url: QR_URL_ES,
+};
+
+export const DEMO_CERTIFICATES = [DEMO_CERTIFICATE, DEMO_CERTIFICATE_ES];
+
+const EXTRA_TERMS: Record<number, string[]> = {
+    1: ['TP-06587', 'Exemplar Global', 'LEED', 'GREEN ASSOCIATE', 'LEED GREEN ASSOCIATE'],
+    2: [
+        'LEED',
+        'GREEN ASSOCIATE',
+        'LEED GREEN ASSOCIATE',
+        'Certificado de Capacitacion',
+        'sostenibilidad',
+        'Liderazgo en Energia',
+        'Exemplar Global',
+        'espanol',
+    ],
+};
 
 const normalize = (value: string) =>
     value
@@ -46,53 +72,101 @@ const normalize = (value: string) =>
         .toLowerCase()
         .trim();
 
-export const matchesDemoCertificate = (query: string) => {
+const haystackFor = (cert: (typeof DEMO_CERTIFICATES)[number]) =>
+    [
+        cert.company_name,
+        cert.number,
+        cert.standard_name,
+        cert.standard_code,
+        cert.scope,
+        ...(EXTRA_TERMS[cert.id] || []),
+        'HENRRY',
+        'WILLIAM',
+        'RAMOS',
+        'ALTAMIRANO',
+    ]
+        .join(' ')
+        .toLowerCase();
+
+const HAYSTACKS = new Map(DEMO_CERTIFICATES.map((cert) => [cert.id, normalize(haystackFor(cert))]));
+
+export const findDemoCertificates = (query: string) => {
     const needle = normalize(query);
-    if (!needle) return false;
-    if (
-        needle === DEMO_CERTIFICATE.company_token ||
-        needle === DEMO_CERTIFICATE.public_token ||
-        needle === String(DEMO_CERTIFICATE.company_id)
-    ) {
-        return true;
+    if (!needle) return [];
+
+    const byIdentity = DEMO_CERTIFICATES.filter(
+        (cert) =>
+            needle === normalize(cert.public_token) ||
+            needle === normalize(cert.number) ||
+            needle === normalize(cert.registration_number)
+    );
+    if (byIdentity.length > 0) return byIdentity;
+
+    if (needle === normalize(COMPANY.company_token) || needle === String(COMPANY.company_id)) {
+        return DEMO_CERTIFICATES;
     }
-    if (needle.length < 2) return false;
-    return HAYSTACK.includes(needle);
+
+    if (needle.length < 2) return [];
+
+    return DEMO_CERTIFICATES.filter((cert) => HAYSTACKS.get(cert.id)?.includes(needle));
 };
 
-export const demoSearchResponse = () => ({
-    count: 1,
-    results: [DEMO_CERTIFICATE],
-    next: null,
-    previous: null,
-});
+export const findDemoCertificate = (identifier: string) => {
+    const needle = normalize(identifier);
+    const byToken = DEMO_CERTIFICATES.find((cert) => needle === normalize(cert.public_token));
+    if (byToken) return byToken;
 
-export const demoVerifyResponse = () => ({
-    valid: true,
-    certificate: { ...DEMO_CERTIFICATE },
+    const byNumber = DEMO_CERTIFICATES.find(
+        (cert) => needle === normalize(cert.number) || needle === normalize(cert.registration_number)
+    );
+    if (byNumber) return byNumber;
+
+    return findDemoCertificates(identifier)[0] ?? null;
+};
+
+export const matchesDemoCertificate = (query: string) => findDemoCertificates(query).length > 0;
+
+export const demoSearchResponse = (query = '') => {
+    const results = query ? findDemoCertificates(query) : DEMO_CERTIFICATES;
+    return {
+        count: results.length,
+        results,
+        next: null,
+        previous: null,
+    };
+};
+
+export const demoVerifyResponse = (identifier?: string) => {
+    const certificate = identifier ? findDemoCertificate(identifier) : DEMO_CERTIFICATE;
+    return {
+        valid: Boolean(certificate),
+        certificate: certificate ? { ...certificate } : null,
+    };
+};
+
+const toCompanyCertificate = (cert: (typeof DEMO_CERTIFICATES)[number]) => ({
+    id: cert.id,
+    iso_standard_name: cert.iso_standard_name,
+    iso_standard_code: cert.iso_standard_code,
+    standard_name: cert.standard_name,
+    standard_code: cert.standard_code,
+    registration_number: cert.number,
+    number: cert.number,
+    public_token: cert.public_token,
+    status: cert.status,
+    issue_date: cert.issue_date,
+    company: cert.company_name,
+    company_id: cert.company_id,
+    file_url: cert.file_url,
 });
 
 export const demoCompanyCertificates = () => ({
-    certificates: [
-        {
-            id: DEMO_CERTIFICATE.id,
-            iso_standard_name: DEMO_CERTIFICATE.iso_standard_name,
-            iso_standard_code: DEMO_CERTIFICATE.iso_standard_code,
-            registration_number: DEMO_CERTIFICATE.number,
-            number: DEMO_CERTIFICATE.number,
-            public_token: DEMO_CERTIFICATE.public_token,
-            status: DEMO_CERTIFICATE.status,
-            issue_date: DEMO_CERTIFICATE.issue_date,
-            company: DEMO_CERTIFICATE.company_name,
-            company_id: DEMO_CERTIFICATE.company_id,
-            file_url: DEMO_CERTIFICATE.file_url,
-        },
-    ],
-    total_count: 1,
-    returned_count: 1,
+    certificates: DEMO_CERTIFICATES.map(toCompanyCertificate),
+    total_count: DEMO_CERTIFICATES.length,
+    returned_count: DEMO_CERTIFICATES.length,
     company: {
-        id: DEMO_CERTIFICATE.company_id,
-        name: DEMO_CERTIFICATE.company_name,
-        country: DEMO_CERTIFICATE.company_country,
+        id: COMPANY.company_id,
+        name: COMPANY.company_name,
+        country: COMPANY.company_country,
     },
 });

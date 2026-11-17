@@ -946,7 +946,13 @@ const CertificateDetail = () => {
                                             <button
                                                 className="btn w-100"
                                                 style={{ background: 'rgb(21, 157, 188)', color: 'white', border: 'medium', borderRadius: '8px', padding: '12px 16px', fontSize: '0.9rem', fontWeight: 600, textTransform: 'uppercase', letterSpacing: '0.5px', transition: '0.2s', transform: 'translateY(0px)', boxShadow: 'none' }}
-                                                onClick={() => navigate(`/certificate?code=${cert.number || cert.registration_number}`)}
+                                                onClick={() => {
+                                                    if (cert.public_token) {
+                                                        navigate(`/certificate?token=${cert.public_token}`);
+                                                    } else {
+                                                        navigate(`/certificate?code=${cert.number || cert.registration_number}`);
+                                                    }
+                                                }}
                                             >
                                                 Ver Certificado
                                             </button>

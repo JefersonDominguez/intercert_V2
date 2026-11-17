@@ -9,7 +9,6 @@ import {
     demoCompanyCertificates,
     demoSearchResponse,
     demoVerifyResponse,
-    matchesDemoCertificate,
 } from '../data/demoCertificate';
 import type {
     Certificate,
@@ -37,8 +36,9 @@ export const certificacionesCleanApi = {
      * Verify a certificate by number or token
      */
     verify: async (identifier: string, _type: 'number' | 'token' = 'number'): Promise<CertificateVerification> => {
-        if (matchesDemoCertificate(identifier) || identifier === 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d') {
-            return demoVerifyResponse() as unknown as CertificateVerification;
+        const response = demoVerifyResponse(identifier);
+        if (response.valid && response.certificate) {
+            return response as unknown as CertificateVerification;
         }
         return { valid: false, certificate: null } as unknown as CertificateVerification;
     },
@@ -47,10 +47,7 @@ export const certificacionesCleanApi = {
      * Public search for certificates (by company name, RUC or number)
      */
     search: async (query: string, _limit: number = 20): Promise<PaginatedResponse<Certificate>> => {
-        if (!matchesDemoCertificate(query)) {
-            return { count: 0, results: [], next: null, previous: null };
-        }
-        return demoSearchResponse() as unknown as PaginatedResponse<Certificate>;
+        return demoSearchResponse(query) as unknown as PaginatedResponse<Certificate>;
     },
 
     /**
