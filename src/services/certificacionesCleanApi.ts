@@ -54,9 +54,8 @@ export const certificacionesCleanApi = {
      * Get certificates for a specific company
      */
     getCompanyCertificates: async (companyId: number | string): Promise<CompanyCertificatesResponse> => {
-        if (String(companyId) === '1' || String(companyId) === '4f3c2a10-8b21-4d5e-9a77-1c0e6b8a2512') {
-            return demoCompanyCertificates();
-        }
+        const data = demoCompanyCertificates(companyId);
+        if (data.company) return data;
         return { certificates: [], total_count: 0, returned_count: 0, company: null };
     },
 

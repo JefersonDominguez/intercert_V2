@@ -1,9 +1,10 @@
 const PDF_URL = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-2.pdf';
 const PDF_URL_ES = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-es.pdf';
+const PDF_URL_FRANKLIN = '/certificates/franklin-atonio-meza-marcatona.pdf';
 const QR_URL = '/certificates/qr-henrry.jpg';
 const QR_URL_ES = '/certificates/qr-henrry-es.png';
 
-const COMPANY = {
+const HENRRY = {
     company_id: 1,
     company: 'HENRRY WILLIAM RAMOS ALTAMIRANO',
     company_name: 'HENRRY WILLIAM RAMOS ALTAMIRANO',
@@ -13,12 +14,22 @@ const COMPANY = {
     company_token: '4f3c2a10-8b21-4d5e-9a77-1c0e6b8a2512',
 };
 
+const FRANKLIN = {
+    company_id: 2,
+    company: 'FRANKLIN ATONIO MEZA MARCATONA',
+    company_name: 'FRANKLIN ATONIO MEZA MARCATONA',
+    company_country: 'Perú',
+    company_address: 'Perú',
+    company_addresses: [] as string[],
+    company_token: '7c2a9e14-5b68-4d3f-a1e0-6f8b2c4d9a17',
+};
+
 export const DEMO_CERTIFICATE = {
     id: 1,
     number: 'ICA-LGA-2512104',
     registration_number: 'ICA-LGA-2512104',
     public_token: 'a1b2c3d4-e5f6-4a7b-8c9d-0e1f2a3b4c5d',
-    ...COMPANY,
+    ...HENRRY,
     status: 'Activo',
     issue_date: '2025-12-04',
     initial_certification_date: '2025-12-04',
@@ -36,7 +47,7 @@ export const DEMO_CERTIFICATE_ES = {
     number: 'ICA-LGA-2512104',
     registration_number: 'ICA-LGA-2512104',
     public_token: 'c3d4e5f6-a7b8-4c9d-8e0f-1a2b3c4d5e6f',
-    ...COMPANY,
+    ...HENRRY,
     status: 'Activo',
     issue_date: '2025-12-04',
     initial_certification_date: '2025-12-04',
@@ -49,10 +60,32 @@ export const DEMO_CERTIFICATE_ES = {
     qr_image_url: QR_URL_ES,
 };
 
-export const DEMO_CERTIFICATES = [DEMO_CERTIFICATE, DEMO_CERTIFICATE_ES];
+export const DEMO_CERTIFICATE_FRANKLIN = {
+    id: 3,
+    number: 'ICA-SAM-2611020',
+    registration_number: 'ICA-SAM-2611020',
+    public_token: 'e4b7c1d8-2a90-4f63-8b15-0c6d7e8f9a21',
+    ...FRANKLIN,
+    status: 'Activo',
+    issue_date: '2026-11-20',
+    initial_certification_date: '2026-11-20',
+    standard_code: 'Sostenibilidad Ambiental',
+    iso_standard_code: 'Sostenibilidad Ambiental',
+    standard_name: 'SOSTENIBILIDAD AMBIENTAL',
+    iso_standard_name: 'SOSTENIBILIDAD AMBIENTAL',
+    scope: 'Ha aprobado satisfactoriamente el curso de Sostenibilidad Ambiental (120 horas), habiendo desarrollado conocimientos y competencias en sostenibilidad ambiental, gestión responsable de los recursos naturales, protección del medio ambiente, desarrollo sostenible y buenas prácticas ambientales, bajo la norma ISO 14001:201. Certificado emitido por INTERCERT.',
+    file_url: PDF_URL_FRANKLIN,
+};
+
+const PROFILES = [
+    { ...HENRRY, certificates: [DEMO_CERTIFICATE, DEMO_CERTIFICATE_ES] },
+    { ...FRANKLIN, certificates: [DEMO_CERTIFICATE_FRANKLIN] },
+];
+
+export const DEMO_CERTIFICATES = PROFILES.flatMap((profile) => profile.certificates);
 
 const EXTRA_TERMS: Record<number, string[]> = {
-    1: ['TP-06587', 'Exemplar Global', 'LEED', 'GREEN ASSOCIATE', 'LEED GREEN ASSOCIATE'],
+    1: ['TP-06587', 'Exemplar Global', 'LEED', 'GREEN ASSOCIATE', 'LEED GREEN ASSOCIATE', 'HENRRY', 'WILLIAM', 'RAMOS', 'ALTAMIRANO'],
     2: [
         'LEED',
         'GREEN ASSOCIATE',
@@ -62,6 +95,20 @@ const EXTRA_TERMS: Record<number, string[]> = {
         'Liderazgo en Energia',
         'Exemplar Global',
         'espanol',
+        'HENRRY',
+        'WILLIAM',
+        'RAMOS',
+        'ALTAMIRANO',
+    ],
+    3: [
+        'SOSTENIBILIDAD AMBIENTAL',
+        'Sostenibilidad Ambiental',
+        'ISO 14001:201',
+        'ICA-SAM-2611020',
+        'FRANKLIN',
+        'ATONIO',
+        'MEZA',
+        'MARCATONA',
     ],
 };
 
@@ -80,15 +127,18 @@ const haystackFor = (cert: (typeof DEMO_CERTIFICATES)[number]) =>
         cert.standard_code,
         cert.scope,
         ...(EXTRA_TERMS[cert.id] || []),
-        'HENRRY',
-        'WILLIAM',
-        'RAMOS',
-        'ALTAMIRANO',
     ]
         .join(' ')
         .toLowerCase();
 
 const HAYSTACKS = new Map(DEMO_CERTIFICATES.map((cert) => [cert.id, normalize(haystackFor(cert))]));
+
+const profileFor = (identifier: string) => {
+    const needle = normalize(identifier);
+    return PROFILES.find(
+        (profile) => needle === String(profile.company_id) || needle === normalize(profile.company_token)
+    );
+};
 
 export const findDemoCertificates = (query: string) => {
     const needle = normalize(query);
@@ -102,9 +152,8 @@ export const findDemoCertificates = (query: string) => {
     );
     if (byIdentity.length > 0) return byIdentity;
 
-    if (needle === normalize(COMPANY.company_token) || needle === String(COMPANY.company_id)) {
-        return DEMO_CERTIFICATES;
-    }
+    const profile = profileFor(needle);
+    if (profile) return profile.certificates;
 
     if (needle.length < 2) return [];
 
@@ -160,13 +209,25 @@ const toCompanyCertificate = (cert: (typeof DEMO_CERTIFICATES)[number]) => ({
     file_url: cert.file_url,
 });
 
-export const demoCompanyCertificates = () => ({
-    certificates: DEMO_CERTIFICATES.map(toCompanyCertificate),
-    total_count: DEMO_CERTIFICATES.length,
-    returned_count: DEMO_CERTIFICATES.length,
-    company: {
-        id: COMPANY.company_id,
-        name: COMPANY.company_name,
-        country: COMPANY.company_country,
-    },
-});
+export const demoCompanyCertificates = (identifier?: string | number) => {
+    const profile = profileFor(String(identifier ?? ''));
+    if (!profile) {
+        return {
+            certificates: [],
+            total_count: 0,
+            returned_count: 0,
+            company: null,
+        };
+    }
+
+    return {
+        certificates: profile.certificates.map(toCompanyCertificate),
+        total_count: profile.certificates.length,
+        returned_count: profile.certificates.length,
+        company: {
+            id: profile.company_id,
+            name: profile.company_name,
+            country: profile.company_country,
+        },
+    };
+};
