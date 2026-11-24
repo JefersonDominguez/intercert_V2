@@ -1,9 +1,11 @@
 const PDF_URL = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-2.pdf';
 const PDF_URL_ES = '/certificates/leed-green-associate-henrry-william-ramos-altamirano-es.pdf';
 const PDF_URL_FRANKLIN = '/certificates/franklin-atonio-meza-marcatona.pdf';
+const PDF_URL_RUIZ = '/certificates/ruiz-arce-luis-alex.pdf';
 const QR_URL = '/certificates/qr-henrry.jpg';
 const QR_URL_ES = '/certificates/qr-henrry-es.png';
 const QR_URL_FRANKLIN = '/certificates/qr-franklin.png';
+const QR_URL_RUIZ = '/certificates/qr-ruiz.png';
 
 const HENRRY = {
     company_id: 1,
@@ -89,10 +91,28 @@ export const DEMO_CERTIFICATE_FRANKLIN = {
     qr_image_url: QR_URL_FRANKLIN,
 };
 
+export const DEMO_CERTIFICATE_RUIZ = {
+    id: 4,
+    number: 'ICA-LGA-2311101',
+    registration_number: 'ICA-LGA-2311101',
+    public_token: 'b7e1c4a2-6d38-4f90-9c15-2a8e4b6d0f31',
+    ...RUIZ,
+    status: 'Activo',
+    issue_date: '2025-11-23',
+    initial_certification_date: '2025-11-23',
+    standard_code: 'LEED Green Associate',
+    iso_standard_code: 'LEED Green Associate',
+    standard_name: 'LEED GREEN ASSOCIATE',
+    iso_standard_name: 'LEED GREEN ASSOCIATE',
+    scope: 'Ha completado satisfactoriamente el curso de LEED GREEN ASSOCIATE (100 horas), por demostrar experiencia en prácticas de construcción sostenible y en los principios LEED (Liderazgo en Energía y Diseño Ambiental). En reconocimiento a su compromiso con la sostenibilidad y el desarrollo de edificaciones responsables. Certificado emitido por INTERCERT.',
+    file_url: PDF_URL_RUIZ,
+    qr_image_url: QR_URL_RUIZ,
+};
+
 const PROFILES = [
     { ...HENRRY, certificates: [DEMO_CERTIFICATE, DEMO_CERTIFICATE_ES] },
     { ...FRANKLIN, certificates: [DEMO_CERTIFICATE_FRANKLIN] },
-    { ...RUIZ, certificates: [] as Array<typeof DEMO_CERTIFICATE> },
+    { ...RUIZ, certificates: [DEMO_CERTIFICATE_RUIZ] },
 ];
 
 const PROFILE_TERMS: Record<number, string[]> = {
@@ -126,6 +146,18 @@ const EXTRA_TERMS: Record<number, string[]> = {
         'ATONIO',
         'MEZA',
         'MARCATONA',
+    ],
+    4: [
+        'LEED',
+        'GREEN ASSOCIATE',
+        'LEED GREEN ASSOCIATE',
+        'Certificado de Capacitacion',
+        'Liderazgo en Energia',
+        'ICA-LGA-2311101',
+        'RUIZ',
+        'ARCE',
+        'LUIS',
+        'ALEX',
     ],
 };
 
