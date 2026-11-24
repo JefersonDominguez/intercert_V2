@@ -78,6 +78,21 @@ const CertificateVerification = () => {
                 const companiesMap: { [key: string]: SearchResultItem } = {};
 
                 results.forEach((cert: any) => {
+                    if (cert.profile_only) {
+                        const companyId = cert.company_id || 'unknown';
+                        if (!companiesMap[companyId]) {
+                            companiesMap[companyId] = {
+                                id: companyId,
+                                companyName: typeof cert.company === 'string' ? cert.company : (cert.company?.name || 'Empresa Desconocida'),
+                                country: 'PE',
+                                certificates: 0,
+                                standards: 0,
+                                locations: 1,
+                                lastCertificationDate: cert.issue_date
+                            };
+                        }
+                        return;
+                    }
                     const companyId = cert.company_id || 'unknown';
                     if (!companiesMap[companyId]) {
                         companiesMap[companyId] = {

@@ -256,6 +256,21 @@ const CompanyResults = () => {
                 // Búsqueda por nombre de empresa (agrupar resultados por empresa)
                 const companiesMap: { [key: string]: SearchResult } = {};
                 results.forEach((cert: any) => {
+                    if (cert.profile_only) {
+                        const companyId = cert.company_id || (cert.company as any)?.id;
+                        if (companyId && !companiesMap[companyId]) {
+                            companiesMap[companyId] = {
+                                id: companyId,
+                                companyName: typeof cert.company === 'string' ? cert.company : (cert.company as any)?.name || '',
+                                country: 'PE',
+                                certificates: 0,
+                                standards: 0,
+                                locations: 1,
+                                lastCertificationDate: cert.issue_date
+                            };
+                        }
+                        return;
+                    }
                     const companyId = cert.company_id || (cert.company as any)?.id;
                     if (companyId && !companiesMap[companyId]) {
                         companiesMap[companyId] = {

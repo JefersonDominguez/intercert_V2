@@ -109,6 +109,20 @@ const VerificationForm: React.FC<VerificationFormProps> = ({
                     const companiesMap: Record<number, SearchSuggestion> = {};
 
                     searchResult.results.forEach(cert => {
+                        if ((cert as any).profile_only) {
+                            if (!companiesMap[cert.company_id]) {
+                                companiesMap[cert.company_id] = {
+                                    companyName: cert.company || cert.company_name || 'Empresa desconocida',
+                                    recordCount: 0,
+                                    registrationNumber: '',
+                                    searchType: 'company',
+                                    country: cert.company_country || 'Perú',
+                                    companyId: cert.company_id,
+                                    companyToken: cert.company_token || null
+                                };
+                            }
+                            return;
+                        }
                         let companyEntry = companiesMap[cert.company_id];
                         if (!companyEntry) {
                             companyEntry = {

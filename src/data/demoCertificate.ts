@@ -3,6 +3,7 @@ const PDF_URL_ES = '/certificates/leed-green-associate-henrry-william-ramos-alta
 const PDF_URL_FRANKLIN = '/certificates/franklin-atonio-meza-marcatona.pdf';
 const QR_URL = '/certificates/qr-henrry.jpg';
 const QR_URL_ES = '/certificates/qr-henrry-es.png';
+const QR_URL_FRANKLIN = '/certificates/qr-franklin.png';
 
 const HENRRY = {
     company_id: 1,
@@ -22,6 +23,16 @@ const FRANKLIN = {
     company_address: 'Perú',
     company_addresses: [] as string[],
     company_token: '7c2a9e14-5b68-4d3f-a1e0-6f8b2c4d9a17',
+};
+
+const RUIZ = {
+    company_id: 3,
+    company: 'RUIZ ARCE LUIS ALEX',
+    company_name: 'RUIZ ARCE LUIS ALEX',
+    company_country: 'Perú',
+    company_address: 'Perú',
+    company_addresses: [] as string[],
+    company_token: '3f8c2a61-7b40-4e95-a2d1-6c9e0b4f8a17',
 };
 
 export const DEMO_CERTIFICATE = {
@@ -75,12 +86,18 @@ export const DEMO_CERTIFICATE_FRANKLIN = {
     iso_standard_name: 'SOSTENIBILIDAD AMBIENTAL',
     scope: 'Ha aprobado satisfactoriamente el curso de Sostenibilidad Ambiental (120 horas), habiendo desarrollado conocimientos y competencias en sostenibilidad ambiental, gestión responsable de los recursos naturales, protección del medio ambiente, desarrollo sostenible y buenas prácticas ambientales, bajo la norma ISO 14001:201. Certificado emitido por INTERCERT.',
     file_url: PDF_URL_FRANKLIN,
+    qr_image_url: QR_URL_FRANKLIN,
 };
 
 const PROFILES = [
     { ...HENRRY, certificates: [DEMO_CERTIFICATE, DEMO_CERTIFICATE_ES] },
     { ...FRANKLIN, certificates: [DEMO_CERTIFICATE_FRANKLIN] },
+    { ...RUIZ, certificates: [] as Array<typeof DEMO_CERTIFICATE> },
 ];
+
+const PROFILE_TERMS: Record<number, string[]> = {
+    3: ['RUIZ', 'ARCE', 'LUIS', 'ALEX'],
+};
 
 export const DEMO_CERTIFICATES = PROFILES.flatMap((profile) => profile.certificates);
 
@@ -140,6 +157,15 @@ const profileFor = (identifier: string) => {
     );
 };
 
+const profileHaystack = (profile: (typeof PROFILES)[number]) =>
+    normalize([profile.company_name, ...(PROFILE_TERMS[profile.company_id] || [])].join(' '));
+
+const findProfilesByName = (query: string) => {
+    const needle = normalize(query);
+    if (needle.length < 2) return [];
+    return PROFILES.filter((profile) => profileHaystack(profile).includes(needle));
+};
+
 export const findDemoCertificates = (query: string) => {
     const needle = normalize(query);
     if (!needle) return [];
@@ -176,7 +202,22 @@ export const findDemoCertificate = (identifier: string) => {
 export const matchesDemoCertificate = (query: string) => findDemoCertificates(query).length > 0;
 
 export const demoSearchResponse = (query = '') => {
-    const results = query ? findDemoCertificates(query) : DEMO_CERTIFICATES;
+    const certificates = query ? findDemoCertificates(query) : DEMO_CERTIFICATES;
+    const coveredCompanies = new Set(certificates.map((cert) => cert.company_id));
+    const profiles = query
+        ? findProfilesByName(query)
+            .filter((profile) => !coveredCompanies.has(profile.company_id))
+            .map((profile) => ({
+                id: `profile-${profile.company_id}`,
+                profile_only: true,
+                company_id: profile.company_id,
+                company: profile.company_name,
+                company_name: profile.company_name,
+                company_token: profile.company_token,
+                company_country: profile.company_country,
+            }))
+        : [];
+    const results = [...certificates, ...profiles];
     return {
         count: results.length,
         results,

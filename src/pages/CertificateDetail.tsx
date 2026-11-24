@@ -104,6 +104,20 @@ const CertificateDetail = () => {
                 } else {
                     const companiesMap: Record<number, SearchSuggestion> = {};
                     searchResult.results.forEach((cert: any) => {
+                        if (cert.profile_only) {
+                            if (!companiesMap[cert.company_id]) {
+                                companiesMap[cert.company_id] = {
+                                    companyName: cert.company || cert.company_name || 'Empresa desconocida',
+                                    recordCount: 0,
+                                    registrationNumber: '',
+                                    searchType: 'company',
+                                    country: cert.company_country || 'Perú',
+                                    companyId: cert.company_id,
+                                    companyToken: cert.company_token || null
+                                };
+                            }
+                            return;
+                        }
                         let companyEntry = companiesMap[cert.company_id];
                         if (!companyEntry) {
                             companyEntry = {
@@ -274,6 +288,22 @@ const CertificateDetail = () => {
                 } else {
                     const companiesMap: any = {};
                     results.forEach((cert: any) => {
+                        if (cert.profile_only) {
+                            const companyId = cert.company_id || 0;
+                            if (!companiesMap[companyId]) {
+                                companiesMap[companyId] = {
+                                    id: companyId,
+                                    companyName: cert.company_name || cert.company || 'Empresa Desconocida',
+                                    country: cert.company_country || 'Perú',
+                                    certificates: 0,
+                                    standards: new Set(),
+                                    locations: 1,
+                                    lastCertificationDate: cert.issue_date,
+                                    token: cert.company_token
+                                };
+                            }
+                            return;
+                        }
                         const companyId = cert.company_id || 0;
                         if (!companiesMap[companyId]) {
                             companiesMap[companyId] = {
