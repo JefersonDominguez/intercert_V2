@@ -104,7 +104,7 @@ export const DEMO_CERTIFICATE_RUIZ = {
     iso_standard_code: 'LEED Green Associate',
     standard_name: 'LEED GREEN ASSOCIATE',
     iso_standard_name: 'LEED GREEN ASSOCIATE',
-    scope: 'Ha completado satisfactoriamente el curso de LEED GREEN ASSOCIATE (100 horas), por demostrar experiencia en prácticas de construcción sostenible y en los principios LEED (Liderazgo en Energía y Diseño Ambiental). En reconocimiento a su compromiso con la sostenibilidad y el desarrollo de edificaciones responsables. Certificado emitido por INTERCERT.',
+    scope: 'Ha completado satisfactoriamente el curso de LEED GREEN ASSOCIATE (250 horas), por demostrar experiencia en prácticas de construcción sostenible y en los principios LEED (Liderazgo en Energía y Diseño Ambiental). En reconocimiento a su compromiso con la sostenibilidad y el desarrollo de edificaciones responsables. Certificado emitido por INTERCERT.',
     file_url: PDF_URL_RUIZ,
     qr_image_url: QR_URL_RUIZ,
 };
